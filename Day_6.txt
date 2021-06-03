@@ -1,0 +1,219 @@
+1.
+ //Dispose pattern
+    
+    public sealed class  Myclass : IDisposable
+    {
+        Object objects;
+        private bool _disposed;//boolean flag to stop us calling Dispose(twice)
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+
+        }
+        private void Dispose(bool disposing)
+        {
+            if(_disposed)
+            {
+                if(disposing)
+                {
+                    var d=objects as IDisposable;
+                    if (d != null) d.Dispose();
+                }
+            }
+            _disposed = true;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+        }
+    }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.ArrayList
+  public static void Main()
+        {
+//ArrayList
+            ArrayList arrayList = new ArrayList();
+            arrayList.Add("Kalyani");
+            arrayList.Add("Sai");
+            for (int i = 0; i < arrayList.Count; i++)
+            {
+                Console.WriteLine(arrayList[i]);
+            }
+       }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.Hashtable
+  public static void Main()
+        {
+            //Hashtable
+            Hashtable hashtable = new Hashtable();
+            hashtable.Add(101, "Kalyani");
+            hashtable.Add(102, "Sai");
+            hashtable.Add(103, "Jui");
+            ICollection keys = hashtable.Keys;
+            foreach (var item in keys)
+            {
+                Console.WriteLine(item + ":-" + hashtable[item]);
+            }
+       }
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.Queue
+  public static void Main()
+        {
+            //Queue
+            Queue queue = new Queue();
+            queue.Enqueue("C#");
+            queue.Enqueue("PHP");
+            queue.Enqueue("JAVA");
+            //queue Dequeue
+            Console.WriteLine(queue.Peek());
+       }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5.Stack
+  public static void Main()
+        {
+           // 4.Stack
+            Stack stack = new Stack();
+            stack.Push("C#");
+            stack.Push("PHP");
+            stack.Push("JAVA");
+            stack.Pop();
+
+            Console.WriteLine(stack.Peek());
+       }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6.
+ class Class2
+    {
+        public static void Main()
+        {
+            //System.Collections
+            System.Collections.Stack stack1 = new System.Collections.Stack();
+            stack1.Push(1);
+            int x1 = (int)stack1.Pop();
+        }
+    }
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7.System.Collections.Generic
+class Class2
+    {
+        public static void Main()
+        {
+//System.Collections.Generic
+            Stack<int> stack = new Stack<int>();
+            stack.Push(1);
+            int x = stack.Pop();
+        }
+    }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8.Dictionary
+class Class2
+    {
+        public static void Main()
+        {
+            Dictionary<int, string> keyValuePairs = new Dictionary<int, string>();
+            keyValuePairs.Add(1, "Kalyani");
+            keyValuePairs.Remove(1);
+            keyValuePairs.Add(2, "Sai");
+            keyValuePairs.Add(3, "Jui");
+
+            foreach (var item in keyValuePairs)
+            {
+                Console.WriteLine(item.Key + "  " + item.Value);
+            }
+            Console.ReadLine();
+
+        }
+    }
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+9.
+class Class3
+    {
+        public static void Main()
+        {
+            string Input = "aabbbcdeeee";
+            Dictionary<char, int> keyValuePairs = new Dictionary<char, int>();
+            
+            foreach (var item in Input)
+            {
+                int counter;                
+                keyValuePairs.TryGetValue(item, out counter);
+                if(counter==0)
+                {
+                    keyValuePairs.Add(item, 1);
+                }                             
+                else
+                {
+                    keyValuePairs.Remove(item);
+                    keyValuePairs.Add(item, counter+1);
+                }
+            }
+
+            foreach(var item in keyValuePairs)
+            {
+                Console.WriteLine(item.Key+" - "+item.Value);
+            }
+            Console.ReadLine();
+        }
+
+    }
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+10.
+ class Class4
+    {
+        public class StoreData : IEnumerable
+        {
+            List<int> items = new List<int>();
+            public void Add(int i)
+            {
+                items.Add(i);
+            }
+            public IEnumerator GetEnumerator()
+            {
+                foreach (var item in items)
+                {
+                    yield return item;
+                }
+            }
+        }
+        class Class5
+        {
+            public static void Main()
+            {
+                StoreData list = new StoreData();
+                list.Add(1);
+                list.Add(2);
+                foreach (var item in list)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
+    }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+11.Using GOTO
+class Class5
+    {		
+		public static void Main()
+		{
+				int x = 1;
+			Loop:
+				x++;
+				if (x < 20)
+				{
+					Console.WriteLine(x);
+					goto Loop;
+				}
+				Console.ReadLine();
+		}
+	}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
